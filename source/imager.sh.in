@@ -68,6 +68,12 @@ pLog "Modifying Chromecast to use DHCP DNS Servers"
 rm "${ROOTFS}/etc/dhcpcd/dhcpcd-hooks/20-dns.conf"
 mv ./misc/20-dns.conf "${ROOTFS}/etc/dhcpcd/dhcpcd-hooks/"
 
+# Setup local whitelisting. Like Kyocast, but with no server.
+pLog "Setting up Local App Whitelisting"
+mv ./misc/kyoapps.conf "${ROOTFS}/etc/"
+mv ./misc/content_shell.sh "${ROOTFS}/usr/bin/"
+mv ./bin/content_shell "${ROOTFS}/chrome/"
+
 # Upload binaries
 pLog "Adding BusyBox Tools, ADB, CURL, and SSH"
 mv ./bin/{busybox,adbd,curl,dropbear} "${ROOTFS}/bin/"

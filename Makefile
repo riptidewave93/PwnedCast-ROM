@@ -35,12 +35,15 @@ $(BUILD_DIR)/bin: \
 	  prebuilt/curl \
 	  prebuilt/dropbear \
 	  source/update_engine \
+	  source/content_shell \
 	  source/clear_crash_counter
 	$(INSTALL) -d $@
 	$(INSTALL) -m 755 $? $@
 
 $(BUILD_DIR)/misc: \
 	  source/boot-animation \
+	  source/content_shell.sh \
+	  source/kyoapps.con \
 	  source/20-dns.conf
 	$(INSTALL) -d $@
 	cp -r --no-preserve=timestamps $? $@
