@@ -78,10 +78,10 @@ if has_mod_option 'DisableKyocastFully' ; then
 else
 	if has_mod_option 'DisableKyocastOnline' ; then
 		pLog "DisableKyocastOnline Detected, Disabling access to Online KyoCast Service, will use the local application list only"
-		sed -i "s|https://clients3.google.com/cast/chromecast/device/config|http://wedisablethisbymakingitinvalid.local/device/config|g" 
+		sed -i "s|https://clients3.google.com/cast/chromecast/device/config|http://wedisablethisbymakingitinvalid.local/device/config|g" "${ROOTFS}/chrome/content_shell"
 	else
 		pLog "Enabling Team Eureka's KyoCast Service"
-		sed -i "s|https://clients3.google.com/cast/chromecast/device/config|https://whitelist.team-eureka.com/chromecastdevice/config|g" 
+		sed -i "s|https://clients3.google.com/cast/chromecast/device/config|https://whitelist.team-eureka.com/chromecastdevice/config|g" "${ROOTFS}/chrome/content_shell"
 	fi
 	
 	mv ./misc/kyoapps.conf "${ROOTFS}/etc/"
