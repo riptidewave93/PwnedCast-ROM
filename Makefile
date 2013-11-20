@@ -41,7 +41,6 @@ $(BUILD_DIR)/bin: \
 
 $(BUILD_DIR)/misc: \
 	  source/boot-animation \
-	  source/content_shell.sh \
 	  source/kyoapps.conf \
 	  source/20-dns.conf
 	$(INSTALL) -d $@
