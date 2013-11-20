@@ -72,7 +72,25 @@ mv ./misc/20-dns.conf "${ROOTFS}/etc/dhcpcd/dhcpcd-hooks/"
 pLog "Setting up Local App Whitelisting"
 mv ./misc/kyoapps.conf "${ROOTFS}/etc/"
 mv ./misc/content_shell.sh "${ROOTFS}/usr/bin/"
-mv ./bin/content_shell "${ROOTFS}/chrome/"
+
+# We have 3 modes for app lists
+# KyoOnline (which we manage and updates)
+# KyoLocal (where it only runs from the local modified file)
+# Stock (Uses googles servers)
+# By default, we will use KyoOnline, so we set that in the else bracket 
+if has_mod_option 'DisableKyocastOnline' ; then
+	pLog "DisableKyocastOnline Detected, Disabling access to Online KyoCast Service, will use the local application list only"
+	mv ./misc/kyoapps.conf "${ROOTFS}/etc/"
+	mv ./misc/content_shell.sh "${ROOTFS}/usr/bin/"
+	sed -i "s|https://clients3.google.com/cast/chromecast/device/config|http://wedisablethisbymakingitinvalid.local/device/config|g" "${ROOTFS}/chrome/content_shell"
+elif has_mod_option 'DisableKyocastLocal' ; then
+	pLog "DisableKyocastLocal Detected, Disabling KyoCast and using Google's application list"
+else
+	pLog "Enabling Team Eureka's KyoCast Service"
+	mv ./misc/kyoapps.conf "${ROOTFS}/etc/"
+	mv ./misc/content_shell.sh "${ROOTFS}/usr/bin/"
+	sed -i "s|https://clients3.google.com/cast/chromecast/device/config|http://whitelist.team-eureka.com/chromecast/device/config|g" "${ROOTFS}/chrome/content_shell"
+fi
 
 # Upload binaries
 pLog "Adding BusyBox Tools, ADB, CURL, and SSH"
