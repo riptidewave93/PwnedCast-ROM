@@ -89,7 +89,7 @@ else
 	pLog "Enabling Team Eureka's KyoCast Service"
 	mv ./misc/kyoapps.conf "${ROOTFS}/etc/"
 	mv ./misc/content_shell.sh "${ROOTFS}/usr/bin/"
-	sed -i "s|https://clients3.google.com/cast/chromecast/device/config|http://whitelist.team-eureka.com/chromecast/device/config|g" "${ROOTFS}/chrome/content_shell"
+	sed -i "s|https://clients3.google.com/cast/chromecast/device/config|https://whitelist.team-eureka.com/chromecastdevice/config|g" "${ROOTFS}/chrome/content_shell"
 fi
 
 # Upload binaries
