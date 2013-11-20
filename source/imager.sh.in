@@ -74,7 +74,7 @@ mv ./misc/20-dns.conf "${ROOTFS}/etc/dhcpcd/dhcpcd-hooks/"
 # Stock (Uses googles servers)
 # By default, we will use KyoOnline, so we set that in the else bracket 
 if has_mod_option 'DisableKyocastFully' ; then
-	pLog "DisableKyocastLocal Detected, Disabling KyoCast and using Google's application list"
+	pLog "DisableKyocastFully Detected, Disabling KyoCast and using Google's application list"
 else
 	if has_mod_option 'DisableKyocastOnline' ; then
 		pLog "DisableKyocastOnline Detected, Disabling access to Online KyoCast Service, will use the local application list only"
